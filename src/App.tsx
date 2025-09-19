@@ -5,16 +5,20 @@ import AdminProduct from "./pages/admin/AdminProduct"
 import AdminUsers from "./pages/admin/AdminUsers"
 import UserProducts from "./pages/user/UserProducts"
 import AdminOrders from "./pages/admin/AdminOrders"
+import AdminLayout from "./layouts/AdminLayout"
 
 const App = () => {
   return (
-    <div>
+    <div >
         <Routes>
             <Route path="/" element={<Login />}/>
             <Route path="/register" element={<Register />}/>
-            <Route path="/admin/products" element={<AdminProduct />}/>
-            <Route path="/admin/users" element={<AdminUsers />}/>
-             <Route path="/admin/orders" element={<AdminOrders />}/>
+            <Route element={<AdminLayout />}>
+               <Route path="/admin/products" element={<AdminProduct />}/>
+               <Route path="/admin/users" element={<AdminUsers />}/>
+               <Route path="/admin/orders" element={<AdminOrders />}/>
+            </Route>
+
             <Route path="/user/products" element={<UserProducts />}/>
             
 
