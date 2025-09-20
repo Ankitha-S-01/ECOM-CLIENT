@@ -1,14 +1,32 @@
-import AdminTopbar from '@/components/Topbar/AdminTopbar'
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { useEffect } from "react"
+import { Outlet, useNavigate } from "react-router-dom"
+import AdminTopBar from "@/components/Topbar/AdminTopBar"
 
 const AdminLayout = () => {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user")
+    if (storedUser) {
+      try {
+        const user = JSON.parse(storedUser)
+        if (user.role !== "ADMIN") {
+          navigate("/") 
+        }
+      } catch (err) {
+        navigate("/") 
+      }
+    } else {
+      navigate("/") 
+    }
+  }, [navigate])
+
   return (
-    <div className="flex jutify-start items-center flex-col">
-      <AdminTopbar />
+    <div className="flex justify-start items-center flex-col">
+      <AdminTopBar />
       <main>
         <Outlet />
-        </main>
+      </main>
     </div>
   )
 }
